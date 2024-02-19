@@ -9,6 +9,9 @@ from typing import TypeVar
 
 
 class Auth:
+    """
+      Auth Class
+    """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """Require Auth"""
         return False
