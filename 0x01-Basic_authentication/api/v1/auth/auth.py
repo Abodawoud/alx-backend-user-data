@@ -12,6 +12,7 @@ class Auth:
     """
         Auth Class
     """
+
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """Require Auth"""
         if path is None:
@@ -21,6 +22,12 @@ class Auth:
             return True
 
         for excluded_path in excluded_paths:
+            if excluded_path.endswith('*'):
+                prefix = excluded_path.rstrip('*')
+                if path.startswith(prefix):
+                    return False
+            elif path == excluded_path:
+                return False
             if path.startswith(excluded_path.rstrip('/')):
                 return False
 
